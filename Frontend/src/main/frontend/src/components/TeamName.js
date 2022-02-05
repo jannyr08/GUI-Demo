@@ -7,6 +7,7 @@ function TeamName() {
     const [yearA, setYearA] = useState("");
     const [yearB, setYearB] = useState("");
     const [teamName, setTeamName] = useState("Nothing to show here!");
+    const url = "http:pi.cs.oswego.edu:9080";
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -17,13 +18,13 @@ function TeamName() {
             yearB: yearB
         }
         console.log(data);
-        axios.post("http://localhost:9080/teamname", data).then(res => {
+        axios.post(url, data).then(res => {
             getTeamName()
         })
     }
 
     const getTeamName =  () => {
-        axios.get("http://localhost:9080/teamname")
+        axios.get(url)
         .then(res => {
             setTeamName("Your teamname: " + res.data.pop())
         })
