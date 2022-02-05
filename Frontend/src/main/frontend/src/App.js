@@ -1,5 +1,6 @@
 import './App.css';
 import axios from 'axios';
+import TeamName from './components/TeamName';
 
 function App() {
 
@@ -24,6 +25,9 @@ function App() {
 
   return (
     <div className="App">
+
+        {/* <TeamName /> */} 
+
         <h1>GUI and Engine Test App </h1>
         <label>Letter Input 1 </label>
         <input id={"letterInput1"}/>
@@ -40,6 +44,7 @@ function App() {
           <button onClick={handleMessage} id={"postButton"}>Submit Team Name</button>
         <br/>
         <textarea id={"getRequestOutput"}>Nothing here to show!</textarea>
+
     </div>
   );
 }
