@@ -7,7 +7,7 @@ function TeamName() {
     const [yearA, setYearA] = useState("");
     const [yearB, setYearB] = useState("");
     const [teamName, setTeamName] = useState("Nothing to show here!");
-    const url = "http://pi.cs.oswego.edu:9080";
+    const url = "http://pi.cs.oswego.edu:9080/teamname";
 
     const handleSubmit = (event) => {
         event.preventDefault();
