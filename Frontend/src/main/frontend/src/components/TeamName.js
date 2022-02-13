@@ -7,7 +7,7 @@ function TeamName() {
     const [yearA, setYearA] = useState("");
     const [yearB, setYearB] = useState("");
     const [teamName, setTeamName] = useState("Nothing to show here!");
-    const url = "http://pi.cs.oswego.edu:9080/teamname";
+    const url = "http://localhost:9085/teamnames/addteamname";
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -26,7 +26,7 @@ function TeamName() {
     const getTeamName =  () => {
         axios.get(url)
         .then(res => {
-            setTeamName("Your teamname: " + res.data.pop())
+            setTeamName("All teamnames: " + res.data)
         })
     }
 
