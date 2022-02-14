@@ -10,6 +10,7 @@
 
   <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint" />
 
+
   <cors domain="/"
             allowedOrigins="*"
             allowedMethods="GET, POST"

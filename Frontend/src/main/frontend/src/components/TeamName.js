@@ -1,78 +1,89 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function TeamName() {
-    const [nameA, setNameA] = useState("");
-    const [nameB, setNameB] = useState("");
-    const [yearA, setYearA] = useState("");
-    const [yearB, setYearB] = useState("");
-    const [teamName, setTeamName] = useState("Nothing to show here!");
-    const url = "http://localhost:9085/teamnames/addteamname";
+const TeamName = () => {
+  const [formData, setFormData] = useState({
+    nameA: '',
+    nameB: '',
+    yearA: '',
+    yearB: '',
+  });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = {
-            nameA: nameA,
-            nameB: nameB,
-            yearA: yearA, 
-            yearB: yearB
-        }
-        console.log(data);
-        axios.post(url, data).then(res => {
-            getTeamName()
-        })
-    }
+  const { nameA, nameB, yearA, yearB } = formData;
 
-    const getTeamName =  () => {
-        axios.get(url)
-        .then(res => {
-            setTeamName("All teamnames: " + res.data)
-        })
-    }
+  const [teamName, setTeamName] = useState('Nothing to show here!');
+  const url = 'http://localhost:9085/teamnames/addteamname';
 
-    return (
-        <>
-        <form onSubmit={handleSubmit}>
-            <h1>GUI and Engine Test App </h1>
-            <label>Name A </label>
-            <input 
-            type="text"
-            value={nameA}
-            onChange={(e) => setNameA(e.target.value)}
-            />
-            <br/>
+  const OnChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-            <label>Name B</label>
-            <input
-             type="text"
-             value={nameB}
-             onChange={(e) => setNameB(e.target.value)}
-            />
-            <br/>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      nameA: nameA,
+      nameB: nameB,
+      yearA: yearA,
+      yearB: yearB,
+    };
+    console.log(data);
+    await axios.post(url, data);
+    getTeamName();
+  };
 
-            <label>Year A</label>
-            <input
-             type="text"
-             value={yearA}
-             onChange={(e) => setYearA(e.target.value)}/>
-            <br/>
+  const getTeamName = async () => {
+    const res = await axios.get(url);
+    setTeamName('All teamnames: ' + res.data);
+  };
 
-            <label>Year B</label>
-            <input
-            type="text"
-            value={yearB}
-            onChange={(e) => setYearB(e.target.value)}
-            />
+  return (
+    <div>
+      <div>
+        <h1>GUI and Engine Test App </h1>
+        <label>Name A </label>
+        <input
+          type='text'
+          value={nameA}
+          name='nameA'
+          onChange={(e) => OnChange(e)}
+        />
+        <br />
 
-            <br/>
-            <button type="submit">Submit Team Name</button>
-            <br/>
+        <label>Name B</label>
+        <input
+          type='text'
+          value={nameB}
+          name='nameB'
+          onChange={(e) => OnChange(e)}
+        />
+        <br />
 
-        </form>
+        <label>Year A</label>
+        <input
+          type='text'
+          value={yearA}
+          name='yearA'
+          onChange={(e) => OnChange(e)}
+        />
+        <br />
 
-        <textarea value={teamName} onChange={(e) => setTeamName(e.target.value)}/> 
-        </>
-    );
-}
+        <label>Year B</label>
+        <input
+          type='text'
+          value={yearB}
+          name='yearB'
+          onChange={(e) => OnChange(e)}
+        />
+
+        <br />
+        <button type='button' onClick={handleSubmit}>
+          Submit Team Name
+        </button>
+        <br />
+      </div>
+
+      <textarea value={teamName} />
+    </div>
+  );
+};
 
 export default TeamName;
